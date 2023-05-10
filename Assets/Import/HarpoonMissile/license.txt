@@ -1,0 +1,11 @@
+Model Information:
+* title:	Harpoon Missile
+* source:	https://sketchfab.com/3d-models/harpoon-missile-96ae39820fd44b43bb6b48f681417e20
+* author:	mahmadsaleem11111 (https://sketchfab.com/mahmadsaleem11111)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Harpoon Missile" (https://sketchfab.com/3d-models/harpoon-missile-96ae39820fd44b43bb6b48f681417e20) by mahmadsaleem11111 (https://sketchfab.com/mahmadsaleem11111) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

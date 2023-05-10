@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace Assets.__Game.Scripts.Character.Player {
-    public class PlayerMovement : CharacterMovement {
+    public sealed class PlayerMovement : CharacterMovement {
 
         //Private
         private CharacterController characterController;

@@ -1,10 +1,5 @@
-﻿using System;
-
-namespace Assets.__Game.Scripts.Character {
+﻿namespace Assets.__Game.Scripts.Character {
     public sealed class CharacterStateController {
-
-        //Events
-        public event Action<CharacterState> OnUpdateState;
 
         public CharacterState CharacterState { get; private set; } = CharacterState.None;
 
