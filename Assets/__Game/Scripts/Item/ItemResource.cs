@@ -1,3 +1,4 @@
+using Assets.__Game.Scripts.Factories;
 using System;
 using UnityEngine;
 
@@ -9,10 +10,10 @@ namespace Assets.__Game.Scripts.Item {
 
         [field: Header("Param's")]
         [field: SerializeField] public ItemResourceSO ItemResourceSO { get; private set; }
-        [field: SerializeField] public float ModelHeight { get; private set; }
+        public float ModelHeight { get; private set; }
 
-        //Private
-        private Collider coll;
+        //Hidden
+        [HideInInspector] public Collider coll;
 
         private void Awake() {
             coll = GetComponent<Collider>();
@@ -22,8 +23,17 @@ namespace Assets.__Game.Scripts.Item {
             ModelHeight = GetItemWidth();
         }
 
-        public void MoveToFactory() {
-            coll.enabled = false;
+        private void OnTriggerEnter(Collider other) {
+            if (other.TryGetComponent(out Factory factory)) {
+                factory.ReceiveItem(this);
+            }
+
+            if (other.TryGetComponent(out Recycler recycler)) {
+                recycler.ReceiveItem(this);
+            }
+        }
+
+        public void ItemDropped() {
             OnItemDrop?.Invoke(this);
         }
 

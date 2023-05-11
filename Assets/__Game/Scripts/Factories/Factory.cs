@@ -7,6 +7,7 @@ using UnityEngine;
 namespace Assets.__Game.Scripts.Factories {
     public sealed class Factory : MonoBehaviour {
 
+        [Header("Param's")]
         [SerializeField] private float produceInterval = 5f;
         [SerializeField] private ItemResourceSO itemToReceive;
         [SerializeField] private ItemResourceSO itemToProduce;
@@ -28,29 +29,27 @@ namespace Assets.__Game.Scripts.Factories {
             ProduceTimer();
         }
 
-        private void OnTriggerEnter(Collider other) {
-            ReceiveItem(other);
-        }
+        public void ReceiveItem(ItemResource item) {
+            if (item.ItemResourceSO.Name == itemToReceive.Name) {
+                foreach (var i in receivedItemPoints) {
+                    if (i.childCount > 0) continue;
 
-        public void ReceiveItem(Collider other) {
-            if (other.TryGetComponent(out ItemResource item)) {
-                if (item.ItemResourceSO.Name == itemToReceive.Name) {
-                    foreach (var i in receivedItemPoints) {
-                        if (i.childCount > 0) continue;
+                    item.transform.SetParent(i);
 
-                        item.MoveToFactory();
-                        item.transform.SetParent(i);
+                    //Rot & pos
+                    item.transform.position = i.position;
+                    item.transform.localRotation = Quaternion.Euler(i.transform.localRotation.x,
+                        i.transform.localRotation.y, i.transform.localRotation.z);
 
-                        //Rot & pos
-                        item.transform.position = i.position;
-                        item.transform.localRotation = Quaternion.Euler(i.transform.localRotation.x,
-                            i.transform.localRotation.y, i.transform.localRotation.z);
+                    //Disable item collider
+                    item.coll.enabled = false;
 
-                        //Add item to list
-                        receivedItems.Add(item.gameObject);
+                    //Add item to list
+                    receivedItems.Add(item.gameObject);
 
-                        break;
-                    }
+                    item.ItemDropped();
+
+                    break;
                 }
             }
         }
