@@ -1,7 +1,7 @@
-﻿using Assets.__Game.Scripts.Factories.Interface;
+﻿using Assets.__Game.Scripts.Machines.Interface;
 using UnityEngine;
 
-namespace Assets.__Game.Scripts.Factories {
+namespace Assets.__Game.Scripts.Machines {
     public sealed class FactoryRoot : IFactory {
 
         //Private

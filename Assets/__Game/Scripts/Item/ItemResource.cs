@@ -1,9 +1,9 @@
-using Assets.__Game.Scripts.Factories;
+using Assets.__Game.Scripts.Machines;
 using System;
 using UnityEngine;
 
 namespace Assets.__Game.Scripts.Item {
-    public class ItemResource : MonoBehaviour {
+    public sealed class ItemResource : MonoBehaviour {
 
         //Events
         public static event Action<ItemResource> OnItemDrop;
@@ -30,6 +30,10 @@ namespace Assets.__Game.Scripts.Item {
 
             if (other.TryGetComponent(out Recycler recycler)) {
                 recycler.ReceiveItem(this);
+            }
+
+            if (other.TryGetComponent(out Table table)) {
+                table.ReceiveItem(this);
             }
         }
 

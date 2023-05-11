@@ -1,10 +1,10 @@
-﻿using Assets.__Game.Scripts.Factories.Interface;
-using Assets.__Game.Scripts.Item;
+﻿using Assets.__Game.Scripts.Item;
+using Assets.__Game.Scripts.Machines.Interface;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Assets.__Game.Scripts.Factories {
+namespace Assets.__Game.Scripts.Machines {
     public sealed class Factory : MonoBehaviour {
 
         [Header("Param's")]
@@ -13,10 +13,10 @@ namespace Assets.__Game.Scripts.Factories {
         [SerializeField] private ItemResourceSO itemToProduce;
         [SerializeField] private List<Transform> receivedItemPoints = new();
         [SerializeField] private List<Transform> producedItemPoints = new();
-        [SerializeField] private List<GameObject> receivedItems = new();
-        [SerializeField] private List<GameObject> producedItems = new();
 
         //Private
+        private List<GameObject> receivedItems = new();
+        private List<GameObject> producedItems = new();
         private float tick;
 
         private IFactory factory;

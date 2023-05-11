@@ -2,8 +2,8 @@ using Assets.__Game.Scripts.Item;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.__Game.Scripts.Factories {
-    public class Recycler : MonoBehaviour {
+namespace Assets.__Game.Scripts.Machines {
+    public sealed class Recycler : MonoBehaviour {
 
         //Private
         private List<GameObject> receivedItems = new();

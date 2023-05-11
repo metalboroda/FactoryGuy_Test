@@ -77,6 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ItemResourceSO>k__BackingField: {fileID: 11400000, guid: 3cc60d2ac83d98a4bb8c87ec4589fa66, type: 2}
+  coll: {fileID: 0}
 --- !u!1 &7654264700569067671
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,7 +139,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 43024745f65e3754ab7eb94ad719cc7f, type: 2}
+  - {fileID: 2100000, guid: 5a59e7ff554c8c847a437b6f30ca70de, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

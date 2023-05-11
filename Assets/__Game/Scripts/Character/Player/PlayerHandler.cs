@@ -8,9 +8,9 @@ namespace Assets.__Game.Scripts.Character.Player {
         [Header("Item holder param's")]
         [SerializeField] private Transform itemHolder;
         [SerializeField] private int maxCapacity = 6;
-        [SerializeField] private List<ItemResource> pickedItems = new();
 
         //Private
+        private List<ItemResource> pickedItems = new();
         private Vector3 stackPos;
 
         private void Start() {
