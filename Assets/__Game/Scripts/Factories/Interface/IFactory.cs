@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.__Game.Scripts.Factory.Interface {
+namespace Assets.__Game.Scripts.Factories.Interface {
     public interface IFactory {
 
         GameObject Produce();

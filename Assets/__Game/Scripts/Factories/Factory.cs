@@ -1,12 +1,13 @@
-﻿using Assets.__Game.Scripts.Factory.Interface;
+﻿using Assets.__Game.Scripts.Factories.Interface;
 using Assets.__Game.Scripts.Item;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Assets.__Game.Scripts.Factory {
-    public class Factory : MonoBehaviour {
+namespace Assets.__Game.Scripts.Factories {
+    public sealed class Factory : MonoBehaviour {
 
+        [SerializeField] private float produceInterval = 5f;
         [SerializeField] private ItemResourceSO itemToReceive;
         [SerializeField] private ItemResourceSO itemToProduce;
         [SerializeField] private List<Transform> receivedItemPoints = new();
@@ -16,7 +17,6 @@ namespace Assets.__Game.Scripts.Factory {
 
         //Private
         private float tick;
-        private float produceInterval = 5f;
 
         private IFactory factory;
 
@@ -32,21 +32,30 @@ namespace Assets.__Game.Scripts.Factory {
             ReceiveItem(other);
         }
 
-        private void ReceiveItem(Collider other) {
+        public void ReceiveItem(Collider other) {
             if (other.TryGetComponent(out ItemResource item)) {
                 if (item.ItemResourceSO.Name == itemToReceive.Name) {
                     foreach (var i in receivedItemPoints) {
                         if (i.childCount > 0) continue;
 
+                        item.MoveToFactory();
                         item.transform.SetParent(i);
+
+                        //Rot & pos
                         item.transform.position = i.position;
+                        item.transform.localRotation = Quaternion.Euler(i.transform.localRotation.x,
+                            i.transform.localRotation.y, i.transform.localRotation.z);
+
+                        //Add item to list
                         receivedItems.Add(item.gameObject);
+
                         break;
                     }
                 }
             }
         }
 
+        #region Production
         private void ProduceTimer() {
             if (receivedItems.Count > 0) {
                 tick += Time.deltaTime;
@@ -61,22 +70,26 @@ namespace Assets.__Game.Scripts.Factory {
 
         private void ProduceItem() {
             try {
-                foreach (var i in receivedItems) {
+                foreach (var unused in receivedItems) {
                     foreach (var j in producedItemPoints) {
                         if (j.childCount == 0) {
+
+                            //Produce
                             var producedItem = factory.Produce();
                             producedItem.transform.SetParent(j);
                             producedItem.transform.position = j.position;
+                            producedItems.Add(producedItem);
 
                             RemoveLastReceivedItem();
+
                             break;
                         }
                     }
                 }
             } catch (System.InvalidOperationException) {
-                //throw;
             }
         }
+        #endregion
 
         private void RemoveLastReceivedItem() {
             var item = receivedItems.Last();
